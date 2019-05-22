@@ -12,28 +12,20 @@ async function app() {
   var result = await net.classify(imgEl);
   var guess = result[0];
   var prob = result[0]["probability"];
-  
-  console.log(guess);
-  if (prob >= .4 ){ //reduce false positives
-    validate = true;
-    //pass this to Earth911 APIs
-    //add sending DIY video kek
-    console.log("");
-    document.getElementById("header").innerHTML=guess["className"];
+  document.getElementById("header").textContent="why so slow";
 
-
-    var loading = false;
-    var huh = (document.getElementById("header").style.display);
-    if (huh == "none"){
-      console.log("woah");
-      document.getElementById("loading").style.display = "";
-    }
-  else{
-    //request user for their descriptions
-    document.getElementById("header").innerHTML="wut is this";
-
+  var headerStyle = document.getElementById("header").style.display;
+  console.log(headerStyle);
+  if (headerStyle != "none"){
+    document.getElementById("loading").style.display = "none";
+  }
+  else if (headerStyle == "none"){
+    document.getElementById("loading").style.display = "";
+    console.log("here");
   }
 
+//loading.io
+
 }
-}
+
 app();
