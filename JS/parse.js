@@ -15,6 +15,6 @@ function getJSONP(url, success) {
 
 }
 
-getJSONP("https://my-json-server.typicode.com/typicode/demo/comments", function(data){ //parse the stuffs
+getJSONP("", function(data){ //parse the stuffs
     console.log(data);
 });  
