@@ -9,6 +9,7 @@ async function app() {
   var imgEl = document.getElementById('img');
   var result = await net.classify(imgEl);
   
+  console.log(result);
   var guess = result[0];
   var prob = result[0]["probability"];
   var className = result[0]["className"];
