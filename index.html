@@ -8,12 +8,13 @@
   <!-- Declare encoding-->
   <meta charset="utf-8" />
 
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
   <div id="console"></div>
   <!-- Image for testing -->
-  <img id="img" crossOrigin src="img/apple.jpg" />
+  <img id="img" crossOrigin src="img/orange1.jpg" />
   <h1 style="display:none;" id="header"></h1>
 
   <div id="container">
@@ -31,7 +32,7 @@
                 <style type="text/css" class="ld ld-spin"
                   style="transform-origin: 50px 50px 0px; animation-duration: 1.5s; animation-delay: -1.5s; animation-direction: normal;">
                   .st0 {
-                    fill: #F5E6C8;
+                    fill: w #F5E6C8;
                   }
 
                   .st1 {
@@ -931,8 +932,16 @@
       </svg></svg>
   </div>
 
+  <div id="map"></div>
+
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRMZ-E56UBFsSCY3cBd4px1CP7VvBS-uE&callback=initMap">
+  </script>
   <script src="js/index.js"></script>
   <script src="js/parse.js"></script>
+
+
 
 </body>
 

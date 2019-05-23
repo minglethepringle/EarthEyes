@@ -36,3 +36,22 @@ function Main() {
     document.getElementById("loading").style.display = "";
   }
 }
+
+function initMap() {
+  var lat = 42.363246;
+  var lng = -71.3818091;
+  var dump = {
+    lat: lat,
+    lng: lng,
+  };
+
+  var map = new google.maps.Map(
+    document.getElementById('map'), {
+      zoom: 15,
+      center: dump
+    });
+  var marker = new google.maps.Marker({
+    position: dump,
+    map: map
+  });
+}
