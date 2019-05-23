@@ -1,0 +1,32 @@
+{
+  "name": "EarthEyes",
+  "version": "0.0.1a",
+  "description": "The Future of Recycling.",
+  "homepage": "eartheyes.github.io",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-http-to-https": "^1.1.4",
+    "node-fetch": "^2.3.0"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minglethepringle/EarthEyes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/minglethepringle/EarthEyes/issues"
+  },
+  "license": "Apache2",
+  "keywords": [
+    "eartheyes",
+    "recycling",
+    "machine learning",
+    "vision"
+  ]
+}
