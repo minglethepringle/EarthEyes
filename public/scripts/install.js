@@ -19,7 +19,7 @@
 
 let deferredInstallPrompt = null;
 const installButton = document.getElementById('butInstall');
-installButton.addEventListener('click', installPWA);
+// installButton.addEventListener('click', installPWA);
 
 // CODELAB: Add event listener for beforeinstallprompt event
 window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
@@ -69,5 +69,5 @@ window.addEventListener('appinstalled', logAppInstalled);
  */
 function logAppInstalled(evt) {
   // CODELAB: Add code to log the event
-  console.log('Weather App was installed.', evt);
+  console.log('EarthEyes was installed.', evt);
 }
