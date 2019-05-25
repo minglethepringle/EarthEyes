@@ -1,19 +1,11 @@
 const express = require('express');
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 var https = require('https');
-
-const WebSocketServer = require('ws').Server
-const wss = new WebSocketServer({ port: 8081 });
 /**
  * Starts the Express server.
  *
  * @return {ExpressServer} instance of the Express server.
  */
-
-
-var latitude;
-var longitude;
-var query;
 function startServer() {
     const app = express();
 
@@ -25,8 +17,8 @@ function startServer() {
     app.get('/endpoint/location', getLocations);
     var util = require('util');
     app.get("/endpoint/query/:latitude/:longitude/:query",function(req, res){
-        latitude = req.params.latitude;
-        longitude = req.params.longitude;
+        var latitude = req.params.latitude;
+        var longitude = req.params.longitude;
         getMaterialsID(req.params.query, latitude, longitude, function(data) {
             if (data["result"].length > 0){
                 res.send(data["result"][0]);
