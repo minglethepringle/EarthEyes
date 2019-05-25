@@ -1,7 +1,9 @@
 $("body").ready(function() {
     // Mobilenet
     async function loadNet() {
+        startLoading();
         net = await mobilenet.load();
+        stopLoading();
     }
 
     async function guess() {
@@ -13,7 +15,7 @@ $("body").ready(function() {
         alert("Guess: " + JSON.stringify(guess));
 
         // stop loading icon
-
+        stopLoading();
         // populate text with guess
         // document.getElementById("header").textContent = guess["className"];
 
@@ -67,6 +69,7 @@ $("body").ready(function() {
             setTimeout(guess, 2000);
 
             // activate loading icon
+            startLoading();
         } else {
             clearPhoto();
         }
@@ -85,6 +88,15 @@ $("body").ready(function() {
         e.preventDefault();
         takePicture();
     });
+
+    /* Loading icon */
+    function startLoading() {
+        $(".loading-icon").fadeIn(300);
+    }
+
+    function stopLoading() {
+        $(".loading-icon").fadeOut(300);
+    }
 
     loadNet();
 });
