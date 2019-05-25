@@ -33,6 +33,7 @@ function startServer() {
             }
             else{
                 console.log("stop trying to reuse 353");
+                res.send({});
             }
         });
         // query = id;
@@ -82,6 +83,10 @@ function getMaterialsID(query, latitude, longitude, callback) {
 
         res.on('end', function () {
             var data = JSON.parse(body);
+            if(data["result"].length <= 0) {
+                callback(data);
+                return;
+            }
             var id = (data["result"][0]["material_id"]);
             getNearestLocation(id, latitude, longitude, callback);
         });

@@ -12,9 +12,16 @@ $("body").ready(function() {
         var result = await net.classify(imgEl);
         if(result.length <= 0) {
             setResult("", "");
+            stopLoading();
             return;
         }
         var guess = result[0]["className"];
+        var probability = result[0]["probability"];
+        if(probability <= 0.05) {
+            setResult("", "");
+            stopLoading();
+            return;
+        }
     
         var latitude = "", longitude = "";
         navigator.geolocation.getCurrentPosition(function(pos) {
@@ -25,12 +32,10 @@ $("body").ready(function() {
             query = encodeURIComponent(query);
             console.log(query);
             $.get("/endpoint/query/"+latitude+"/"+longitude+"/"+query, function(data){
-                setResult(guess, data.description);
+                setResult(guess, (!$.isEmptyObject(data)) ? data.description : "");
                 stopLoading();
             });
         });
-        
-
     }
 
     // Video Streaming
@@ -106,13 +111,27 @@ $("body").ready(function() {
 
     /* Result section */
     function setResult(object, location) {
-        $(".result-object-name").text(object);
-        $(".result-location-name").text(location);
+        if(object == "") {
+            $(".result-object p").hide();
+            $(".result-object-name").text("I'm not sure what this is.");    
+            $(".result hr").addClass("m-0");
+            $('.result-location').hide();
+        } else if(location == "") {
+            $(".result-object-name").text(object);
+            $(".result-location-name").text("N/A");
+        } else {
+            $(".result-object-name").text(object);
+            $(".result-location-name").text(location);
+        }
+        
         showResultSection();
     }
 
     function hideResultSection() {
         $(".result").fadeOut(300);
+        $(".result-object p").show();
+        $('.result-location').show();
+        $(".result hr").removeClass("m-0");
     }
 
     function showResultSection() {
