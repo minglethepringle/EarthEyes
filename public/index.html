@@ -31,6 +31,11 @@
 </head>
 <body>
 
+    <div class="nav-dots">
+        <span class="dot far fa-circle"></span>
+        <span class="dot fas fa-circle"></span>
+        <span class="dot far fa-circle"></span>
+    </div>
     <div class="swipe">
         <div class="swipe-wrap">
             <div class="page page-search-info">
@@ -110,7 +115,10 @@
             continuous: false,
             disableScroll: true,
             stopPropagation: true,
-            callback: function(index, element) {},
+            callback: function(index, element) {
+                $(".dot").removeClass("fas").addClass("far");
+                $(".dot").eq(index).addClass("fas");
+            },
             transitionEnd: function(index, element) {}
         });
     </script>
