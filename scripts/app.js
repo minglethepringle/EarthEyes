@@ -2,24 +2,57 @@ $("body").ready(function() {
     
     var video = $("#video")[0];
     var canvas = $("#canvas")[0];
+    var streaming = false;
+    var width = 0, height = 0;
     navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: false })
         .then(function(stream) {
             video.srcObject = stream;
             video.play();
+            streaming = true;
         })
         .catch(function(err) {
             console.log("An error occurred: " + err);
         });
     video.addEventListener('canplay', function(ev){
+        width = video.videoWidth;
+        height = video.videoHeight;
         if (!streaming) {
             height = video.videoHeight / (video.videoWidth/width);
-        
             video.setAttribute('width', width);
             video.setAttribute('height', height);
             canvas.setAttribute('width', width);
             canvas.setAttribute('height', height);
         }
     }, false);
+
+    function takePicture() {
+        var context = canvas.getContext('2d');
+        if (width && height) {
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+            
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+        } else {
+            clearPhoto();
+        }
+    }
+
+    function clearPhoto() {
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#AAA";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    
+        var data = canvas.toDataURL('image/png');
+        photo.setAttribute('src', data);
+    }
+
+    $(".take-picture").click(function(e) {
+        e.preventDefault();
+        takePicture();
+    });
+
 });
 
 
