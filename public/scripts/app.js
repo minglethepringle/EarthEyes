@@ -16,6 +16,14 @@ $("body").ready(function() {
 
         // populate text with guess
         // document.getElementById("header").textContent = guess["className"];
+
+        var latitude = "42.3626";
+        var longitude = "-71.3614";
+        var query = "water bottle";
+        query = query.encodeURIComponent(query);
+        console.log(query);
+        $.get("/endpoint/query/"+latitude+"/"+longitude+"/"+query,function(data){console.log(data)});
+
     }
 
     // Video Streaming
