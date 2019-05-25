@@ -29,7 +29,7 @@ function startServer() {
         longitude = req.params.longitude;
         getMaterialsID(req.params.query, latitude, longitude, function(data) {
             if (data["result"].length > 0){
-                console.log(data["result"][0]);
+                res.send(data["result"][0]);
             }
             else{
                 console.log("stop trying to reuse 353");

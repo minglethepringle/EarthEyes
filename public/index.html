@@ -45,8 +45,27 @@
                 <div class="camera">
                     <video class="width-100 height-100vh" id="video">Video stream not available.</video>
                     <button type="button" class="btn btn-success btn-xl take-picture"><i class="fa fa-camera"></i></button>
-                    <canvas id="canvas">
-                    </canvas>
+                    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center" style="display: none;">
+                        <img src="images/icons/logo-outer.png" class="loading-outer"/>
+                        <img src="images/icons/logo-inner.png" class="loading-inner"/>
+                    </div>
+
+                    <div class="result" style="display: none;">
+                        <div class="result-object">
+                            <p class="mb-1">THIS IS A:</p>
+                            <b class="result-object-name">water bottle</b>
+                        </div>
+                        <hr>
+                        <div class="result-location d-flex flex-column">
+                            <p class="mb-1">NEAREST RECYCLING:</p>
+                            <div class="d-flex flex-row">
+                                <b class="result-location-name flex-grow-1">Town of Wayland Recycling Center</b>
+                                <span class="fa fa-pin"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <canvas id="canvas"></canvas>
                     <div class="output" style="display: none;">
                         <img id="photo" crossOrigin alt="The screen capture will appear in this box.">
                     </div>

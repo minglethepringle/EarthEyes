@@ -1,28 +1,35 @@
 $("body").ready(function() {
     // Mobilenet
     async function loadNet() {
+        startLoading();
         net = await mobilenet.load();
+        stopLoading();
     }
 
     async function guess() {
 
         var imgEl = document.getElementById('photo');
         var result = await net.classify(imgEl);
-        var guess = result[0];
-        var prob = result[0]["probability"];
-        alert("Guess: " + JSON.stringify(guess));
+        if(result.length <= 0) {
+            setResult("", "");
+            return;
+        }
+        var guess = result[0]["className"];
+    
+        var latitude = "", longitude = "";
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
 
-        // stop loading icon
-
-        // populate text with guess
-        // document.getElementById("header").textContent = guess["className"];
-
-        var latitude = "42.3626";
-        var longitude = "-71.3614";
-        var query = "water bottle";
-        query = query.encodeURIComponent(query);
-        console.log(query);
-        $.get("/endpoint/query/"+latitude+"/"+longitude+"/"+query,function(data){console.log(data)});
+            var query = guess;
+            query = encodeURIComponent(query);
+            console.log(query);
+            $.get("/endpoint/query/"+latitude+"/"+longitude+"/"+query, function(data){
+                setResult(guess, data.description);
+                stopLoading();
+            });
+        });
+        
 
     }
 
@@ -66,7 +73,9 @@ $("body").ready(function() {
             photo.setAttribute('height', height);
             setTimeout(guess, 2000);
 
+            hideResultSection();
             // activate loading icon
+            startLoading();
         } else {
             clearPhoto();
         }
@@ -85,6 +94,30 @@ $("body").ready(function() {
         e.preventDefault();
         takePicture();
     });
+
+    /* Loading icon */
+    function startLoading() {
+        $(".loading-icon").fadeIn(300);
+    }
+
+    function stopLoading() {
+        $(".loading-icon").fadeOut(300);
+    }
+
+    /* Result section */
+    function setResult(object, location) {
+        $(".result-object-name").text(object);
+        $(".result-location-name").text(location);
+        showResultSection();
+    }
+
+    function hideResultSection() {
+        $(".result").fadeOut(300);
+    }
+
+    function showResultSection() {
+        $(".result").fadeIn(300);
+    }
 
     loadNet();
 });
