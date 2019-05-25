@@ -1,5 +1,25 @@
 $("body").ready(function() {
-    
+    // Mobilenet
+    async function loadNet() {
+        net = await mobilenet.load();
+    }
+
+    async function guess() {
+        // activate loading icon
+
+        var imgEl = document.getElementById('photo');
+        var result = await net.classify(imgEl);
+        var guess = result[0];
+        var prob = result[0]["probability"];
+        console.log("Guess: " + guess);
+
+        // stop loading icon
+
+        // populate text with guess
+        document.getElementById("header").textContent = guess["className"];
+    }
+
+    // Video Streaming
     var video = $("#video")[0];
     var canvas = $("#canvas")[0];
     var streaming = false;
@@ -34,6 +54,7 @@ $("body").ready(function() {
             
             var data = canvas.toDataURL('image/png');
             photo.setAttribute('src', data);
+            guess();
         } else {
             clearPhoto();
         }
@@ -53,6 +74,7 @@ $("body").ready(function() {
         takePicture();
     });
 
+    loadNet();
 });
 
 
