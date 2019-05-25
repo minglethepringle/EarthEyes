@@ -5,23 +5,23 @@ $("body").ready(function() {
     }
 
     async function guess() {
-        // activate loading icon
 
         var imgEl = document.getElementById('photo');
         var result = await net.classify(imgEl);
         var guess = result[0];
         var prob = result[0]["probability"];
-        console.log("Guess: " + guess);
+        alert("Guess: " + JSON.stringify(guess));
 
         // stop loading icon
 
         // populate text with guess
-        document.getElementById("header").textContent = guess["className"];
+        // document.getElementById("header").textContent = guess["className"];
     }
 
     // Video Streaming
     var video = $("#video")[0];
     var canvas = $("#canvas")[0];
+    var photo = $("#photo")[0];
     var streaming = false;
     var width = 0, height = 0;
     navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: false })
@@ -52,9 +52,13 @@ $("body").ready(function() {
             canvas.height = height;
             context.drawImage(video, 0, 0, width, height);
             
-            var data = canvas.toDataURL('image/png');
+            var data = canvas.toDataURL('image/jpeg');
             photo.setAttribute('src', data);
-            guess();
+            photo.setAttribute('width', width);
+            photo.setAttribute('height', height);
+            setTimeout(guess, 2000);
+
+            // activate loading icon
         } else {
             clearPhoto();
         }
