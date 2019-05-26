@@ -77,9 +77,9 @@ function getDetails(materialId, callback) {
 
         var data = JSON.parse(body);
         var w = data["result"];
-        var y = w.filter(n => n["material_id"] == 353);
+        var y = w.filter(n => n["material_id"] == materialId);
 
-        callback(y);
+        callback(y[0]);
     });
 }
 
@@ -135,7 +135,11 @@ app.get("/endpoint/getLocationFromMaterialId/:latitude/:longitude/:materialId",f
     setTimeout(function() {
         getNearestLocation(req.params.materialId, req.params.latitude, req.params.longitude, function(data) {
             if(data == null) res.end(500);
-            res.send(data);
+            if (data["result"].length > 0){
+                res.send(data["result"][0]);
+            } else {
+                res.send({});
+            }
         });
     }, 1);
 });

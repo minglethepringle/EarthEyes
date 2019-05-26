@@ -88,12 +88,15 @@
                         </form>
                     </div>
                     <hr>
-                    <div class="resource-links">
-
+                    <h5 class="text-center mb-3 mt-2">Helpful Links:</h5>
+                    <div class="resource-links d-flex">
+                        <div class="col-6">
+                            <a href="https://earth911.com"><img src="./images/earth911.png" class="width-100"></a>
+                        </div>
+                        <div class="col-6">
+                            <a href="https://www.call2recycle.org"><img src="./images/call2recycle.png" class="width-100"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="subpage-info" style="display:none;">
-
                 </div>
             </div>
             <div class="page page-camera">
@@ -112,15 +115,9 @@
                             <p class="mb-1">NEAREST RECYCLING:</p>
                             <div class="d-flex flex-row align-items-center">
                                 <b class="result-location-name flex-grow-1">Staples</b>
-                                <button id="woahwoahwoah" style="display:none" onclick="" type="button"
-                                    class="btn text-white"><svg class="svg-inline--fa fa-location-arrow fa-w-16"
-                                        aria-hidden="true" focusable="false" data-prefix="fa" data-icon="location-arrow"
-                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                        data-fa-i2svg="">
-                                        <path fill="currentColor"
-                                            d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z">
-                                        </path>
-                                    </svg><!-- <i class="fa fa-location-arrow"></i> --></button>
+                                <button id="woahwoahwoah1" style="display:none" onclick="" type="button" class="btn text-white">
+                                    <i class="fa fa-location-arrow"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -133,7 +130,7 @@
             </div>
 
             <div class="page page-settings">
-                <p>Settings</p>
+                <p class="p-3 text-center copyright">© Mingle Li, Jet Chung, 2019. All rights reserved.</p>
             </div>
         </div>
     </div>
@@ -142,6 +139,21 @@
         <div class="row fa-2x p-3 pb-5"><span class="fas fa-chevron-left back-button"></span></div>
         <ul class="search-list p-0">
         </ul>
+    </div>
+
+    <div class="page page-details" style="display:none;">
+        <div class="row fa-2x p-3 pb-5"><span class="fas fa-chevron-left back-button"></span></div>
+        <h1 class="material-name"></h1>
+        <h5 class="material-description pb-3"></h5>
+        <div class="nearest-location">
+            <p class="mb-1">NEAREST RECYCLING:</p>
+            <div class="d-flex flex-row align-items-center">
+                <b class="nearest-location-name flex-grow-1"></b>
+                <button id="woahwoahwoah2" style="display:none" onclick="" type="button" class="btn text-white">
+                    <i class="fa fa-location-arrow"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center"

@@ -43,17 +43,7 @@ $("body").ready(function () {
                 console.log(new_longitude);
                 //var hre = "https://www.google.com/maps/dir/?api=1&origin="+latitude+","+longitude+"&destination="+new_latitude+","+new_longitude;
                 //        var hre="https://www.google.com/maps/dir/"+latitude+","+longitude+"/"+new_latitude+","+new_longitude+"/"+new_latitude+","+new_longitude+"18z";
-                if (new_latitude && new_longitude && latitude && longitude) {
-                    console.log("here1");
-                    var hre1 = "https://www.google.com/maps/dir/?api=1&origin=" + latitude + "," + longitude + "&destination=" + new_latitude + "," + new_longitude;
-                    document.getElementById("woahwoahwoah").onclick = function () {
-                        window.open(hre1, '_blank', 'resizable=yes')
-                    };
-                    document.getElementById("woahwoahwoah").style.display = "";
-                } else {
-                    document.getElementById("woahwoahwoah").style.display = "none";
-
-                }
+                configureMapButton(document.getElementById("woahwoahwoah1"));
 
                 setResult(guess, (!$.isEmptyObject(data)) ? data.description : "");
                 stopLoading();
@@ -64,6 +54,19 @@ $("body").ready(function () {
 
         });
 
+    }
+
+    function configureMapButton(button) {
+        if (new_latitude && new_longitude && latitude && longitude) {
+            console.log("here1");
+            var hre1 = "https://www.google.com/maps/dir/?api=1&origin=" + latitude + "," + longitude + "&destination=" + new_latitude + "," + new_longitude;
+            button.onclick = function () {
+                window.open(hre1, '_blank', 'resizable=yes')
+            };
+            button.style.display = "";
+        } else {
+            button.style.display = "none";
+        }
     }
 
     /* Video Streaming */
@@ -173,7 +176,13 @@ $("body").ready(function () {
         $(".result").fadeIn(300);
     }
 
+
     /* ============================================ */
+
+    /* Quick Recycle */
+    $(".quick-recycle button").click(function() {
+        getDetails($(this).data("id"));
+    });
 
     /* Search Bar */
     $(".form-control").click(function () {
@@ -203,6 +212,49 @@ $("body").ready(function () {
             });
         }
     });
+
+    $(".search-list").on("click", "li", function() {
+        getDetails($(this).data("id"));
+    });
+
+    /* Details Section */
+    function getDetails(id) {
+        startLoading();
+        $.get("/endpoint/getDetails/" + id, function (data) {
+            setDetails(data);
+        }).fail(function () {
+            alert("Server error!");
+            stopLoading();
+        });
+    }
+
+    function setDetails(data) {
+        $(".page-search-list").hide();
+
+        $(".material-name").text(data.description);
+        $(".material-description").text(data.long_description);
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
+            $.get("/endpoint/getLocationFromMaterialId/" + latitude + "/" + longitude + "/" + data.material_id, function (data) {
+                new_latitude = data["latitude"];
+                new_longitude = data["longitude"];
+                //var hre = "https://www.google.com/maps/dir/?api=1&origin="+latitude+","+longitude+"&destination="+new_latitude+","+new_longitude;
+                //        var hre="https://www.google.com/maps/dir/"+latitude+","+longitude+"/"+new_latitude+","+new_longitude+"/"+new_latitude+","+new_longitude+"18z";
+                configureMapButton(document.getElementById("woahwoahwoah2"));
+
+                var name = data.description;
+                $(".nearest-location-name").text((name != null) ? name : "N/A");
+
+                stopLoading();
+            }).fail(function () {
+                alert("Server error!");
+                stopLoading();
+            });
+
+            $(".page-details").show();
+        });
+    }
 
     $("body").on("click", ".back-button", function() {
         $(this).parent().parent().fadeOut();

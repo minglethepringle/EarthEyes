@@ -150,6 +150,24 @@ body {
 .search-list li:hover {
   cursor: pointer;
 }
+/* Detail Page */
+.page-details {
+  position: absolute;
+  top: 0;
+  overflow: scroll;
+  background-color: #eeeeee;
+  z-index: 500;
+}
+.nearest-location {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 1.5em;
+}
+/* "Settings" Page */
+.copyright {
+  color: #999;
+  font-size: 12px;
+}
 /* Mobile/Tablets */
 @media (max-width: 768px) {
   .loading-inner {
