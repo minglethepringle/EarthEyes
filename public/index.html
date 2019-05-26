@@ -83,7 +83,40 @@
         <div class="swipe-wrap">
             <div class="page page-search-info">
                 <div class="subpage-search">
-                    <p>Search</p>
+                    <div class="quick-recycle">
+                        <h4 class="text-center mb-3 mt-2">If you know the type of plastic:</h4>
+                        <div class="row d-flex">
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="60">♻ 1</button>
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="455">♻ 2</button>
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="456">♻ 3</button>
+                        </div>
+                        <div class="row d-flex">
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="708">♻ 4</button>
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="466">♻ 5</button>
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="355">♻ 6</button>
+                        </div>
+                        <div class="row d-flex">
+                            <button class="btn btn-outline-secondary m-1 flex-fill" data-id="476">♻ 7</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="search">
+                        <h4 class="text-center mb-3 mt-2">Or, manually search:</h4>
+                        <form class="search-form" action="POST">
+                            <div class="input-group">
+                                <input class="form-control border-right-0 border" type="search" placeholder="Search for items...">
+                                <span class="input-group-append">
+                                    <button class="btn btn-outline-secondary border-left-0 border" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </sp an>
+                            </div>                        
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="resource-links">
+
+                    </div>
                 </div>
                 <div class="subpage-info" style="display:none;">
 
@@ -92,13 +125,7 @@
             <div class="page page-camera">
                 <div class="camera">
                     <video class="width-100 height-100vh" id="video">Video stream not available.</video>
-                    <button type="button" class="btn btn-success btn-xl take-picture"><i
-                            class="fa fa-camera"></i></button>
-                    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center"
-                        style="display: none;">
-                        <img src="images/icons/logo-outer.png" class="loading-outer" />
-                        <img src="images/icons/logo-inner.png" class="loading-inner" />
-                    </div>
+                    <button type="button" class="btn btn-success btn-xl take-picture"><i class="fa fa-camera"></i></button>
 
                     <div class="result" style="display: none;">
                         <div class="result-object">
@@ -130,6 +157,16 @@
                 <p>Settings</p>
             </div>
         </div>
+    </div>
+
+    <div class="page page-search-list">
+        <ul class="search-list">
+        </ul>
+    </div>
+
+    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center" style="display: none;">
+        <img src="images/icons/logo-outer.png" class="loading-outer"/>
+        <img src="images/icons/logo-inner.png" class="loading-inner"/>
     </div>
 
 
@@ -164,8 +201,8 @@
             autoRestart: false,
             continuous: false,
             disableScroll: true,
-            stopPropagation: true,
-            callback: function (index, element) {
+            stopPropagation: false,
+            callback: function(index, element) {
                 $(".dot").removeClass("fas").addClass("far");
                 $(".dot").eq(index).addClass("fas");
             },

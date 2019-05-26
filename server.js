@@ -1,38 +1,49 @@
-
 'use strict';
 
 // [START gae_node_request_example]
 const express = require('express');
 //const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
-const https = require('https');
+// const https = require('https');
+const request = require('request');
 const app = express();
 
 
 function getMaterialsID(query, latitude, longitude, callback) {
     console.log("1");
+    var url = "https://api.earth911.com/earth911.searchMaterials?query=" + query + "&api_key=4b9fc883188fe866";
+    request(url, function (error, response, body) {
+        if(error != null) {
+            callback(null);
+            return;
+        }
+
+        var data = JSON.parse(body);
+        if(data["result"].length <= 0) {
+            callback(data);
+            console.log("error 1");
+            return;
+
+        }
+        var id = (data["result"][0]["material_id"]);
+        console.log("before location");
+        getNearestLocation(id, latitude, longitude, callback);
+        console.log("3");
+    });
+}
+
+function getListOfMaterials(query, callback) {
+    console.log("getting list");
     var url = "https://api.earth911.com/earth911.searchMaterials?query=" + query + "&api_key=4b9fc883188fe866&callback=";
-    https.get(url, function (res) {
-        var body = '';
 
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
+    request(url, function (error, response, body) {
+        if(error != null) {
+            console.log("e5");
+            callback(null);
+            return;
+        }
 
-        res.on('end', function () {
-            var data = JSON.parse(body);
-            if(data["result"].length <= 0) {
-                callback(data);
-                console.log("error 1");
-                return;
-    
-            }
-            var id = (data["result"][0]["material_id"]);
-            console.log("before location");
-            getNearestLocation(id, latitude, longitude, callback);
-            console.log("3");
-        });
-    }).on('error', function (e) {
-        console.log(e);
+        var data = JSON.parse(body);
+        return data;
     });
 
 }
@@ -41,21 +52,17 @@ function getNearestLocation(id, latitude, longitude, callback) {
     console.log("2");
     
     var url = "https://api.earth911.com/earth911.searchLocations?latitude="+latitude+"&longitude="+longitude+"&material_id="+id+"&api_key=4b9fc883188fe866&callback=";
-    https.get(url, function (res) {
-        var body = '';
+    request(url, function (error, response, body) {
+        if(error != null) {
+            console.log("e2");
+            callback(null);
+            return;
+        }
 
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        res.on('end', function () {
-            var data = JSON.parse(body);
-            console.log("4");
-            callback(data);
-            console.log("4.1");
-        });
-    }).on('error', function (e) {
-        console.log(e);
+        var data = JSON.parse(body);
+        console.log("4");
+        callback(data);
+        console.log("4.1");
     });
 }
 
@@ -72,6 +79,10 @@ app.get("/endpoint/query/:latitude/:longitude/:query",function(req, res){
     var longitude = req.params.longitude;
     setTimeout(function() {
         getMaterialsID(req.params.query, latitude, longitude, function(data) {
+            if(data == null) {
+                res.sendStatus(500);
+                return;
+            }
             console.log("back callback");
             if (data["result"].length > 0){
                 console.log("sed");
@@ -83,7 +94,15 @@ app.get("/endpoint/query/:latitude/:longitude/:query",function(req, res){
             }
         });
     }, 1);
+});
 
+app.get("/endpoint/getMaterials/:query",function(req, res){
+    setTimeout(function() {
+        getListOfMaterials(req.params.query, function(data) {
+            if(data == null) res.end(500);
+            res.send(data["result"]);
+        });
+    }, 1);
 });
 
 app.use(express.static(__dirname + "/public"));
