@@ -98,6 +98,33 @@
     padding: 1em;
 }
 
+/* Search List */
+.page-search-list {
+    position: absolute;
+    top: 0;
+    overflow: scroll;
+    background-color: #eeeeee;
+    z-index: 500;
+}
+
+.back-button {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.search-list {
+    list-style: none;
+    li {
+        padding: 1em;
+        border: 1px solid #ccc;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
 /* Mobile/Tablets */
 @media (max-width: 768px) { 
     .loading-inner {

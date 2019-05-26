@@ -43,7 +43,7 @@ function getListOfMaterials(query, callback) {
         }
 
         var data = JSON.parse(body);
-        return data;
+        callback(data);
     });
 
 }

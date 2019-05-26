@@ -188,20 +188,24 @@ $("body").ready(function () {
             startLoading();
             $.get("/endpoint/getMaterials/" + searchInput, function (data) {
                 stopLoading();
-                var results = data["results"];
-                if (results.length == 0) {
+                if(data.length == 0) {
                     alert("No results found!");
                     return;
                 }
                 $(".search-list").html("");
-                $.each(results, function (i, obj) {
+                $.each(data, function(i, obj) {
                     $(".search-list").append('<li data-id="' + obj.material_id + '">' + obj.description + '</li>');
                 });
-            }).fail(function () {
+                $(".page-search-list").show();
+            }).fail(function() {
                 alert("Could not search!");
                 stopLoading();
             });
         }
+    });
+
+    $("body").on("click", ".back-button", function() {
+        $(this).parent().parent().fadeOut();
     });
 
     loadNet();
