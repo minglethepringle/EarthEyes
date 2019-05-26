@@ -66,6 +66,23 @@ function getNearestLocation(id, latitude, longitude, callback) {
     });
 }
 
+function getDetails(materialId, callback) {
+    var url = "https://api.earth911.com/earth911.getMaterials?api_key=4b9fc883188fe866";
+    request(url, function (error, response, body) {
+        if(error != null) {
+            console.log("e2");
+            callback(null);
+            return;
+        }
+
+        var data = JSON.parse(body);
+        var w = data["result"];
+        var y = w.filter(n => n["material_id"] == 353);
+
+        callback(y);
+    });
+}
+
 
 // app.use(redirectToHTTPS([/localhost:(\d{4})/], [], 301));
 
@@ -104,6 +121,25 @@ app.get("/endpoint/getMaterials/:query",function(req, res){
         });
     }, 1);
 });
+
+app.get("/endpoint/getDetails/:materialId",function(req, res){
+    setTimeout(function() {
+        getDetails(req.params.materialId, function(data) {
+            if(data == null) res.end(500);
+            res.send(data);
+        });
+    }, 1);
+});
+
+app.get("/endpoint/getLocationFromMaterialId/:latitude/:longitude/:materialId",function(req, res){
+    setTimeout(function() {
+        getNearestLocation(req.params.materialId, req.params.latitude, req.params.longitude, function(data) {
+            if(data == null) res.end(500);
+            res.send(data);
+        });
+    }, 1);
+});
+
 
 app.use(express.static(__dirname + "/public"));
 
