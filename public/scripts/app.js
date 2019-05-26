@@ -22,7 +22,7 @@ $("body").ready(function () {
         }
         var guess = result[0]["className"];
         var probability = result[0]["probability"];
-        if (probability <= 0.05) {
+        if (probability <= 0.45) {
             setResult("", "");
             stopLoading();
             return;
