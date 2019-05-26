@@ -1,40 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EarthEyes</title>
-  <meta name="eartheyes" content="EarthEyes">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarthEyes</title>
+    <meta name="eartheyes" content="EarthEyes">
 
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
-  <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="/manifest.json">
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="white">
-  <meta name="apple-mobile-web-app-title" content="EarthEyes">
-  <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-  <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-  <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-  <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-  <link href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-  <link href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-  <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
-  
-  <meta name="description" content="The Future of Recycling.">
-  <meta name="theme-color" content="#026928" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="EarthEyes">
+    <link href="splashscreens/iphone5_splash.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphone6_splash.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphoneplus_splash.png"
+        media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonex_splash.png"
+        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexr_splash.png"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexsmax_splash.png"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
 
-  <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/styles/general.css">
-  <link rel="stylesheet" type="text/css" href="/styles/index.css">
+    <meta name="description" content="The Future of Recycling.">
+    <meta name="theme-color" content="#026928" />
 
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles/general.css">
+    <link rel="stylesheet" type="text/css" href="/styles/index.css">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
-<body>
 
+<body>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRMZ-E56UBFsSCY3cBd4px1CP7VvBS-uE&callback=initMap">
+    </script>
+    <script>
+        function initMap() {
+            // The location of Uluru
+            var uluru = {
+                lat: -25.344,
+                lng: 131.036
+            };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), {
+                    zoom: 4,
+                    center: uluru
+                });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
     <div class="nav-dots">
         <span class="dot far fa-circle"></span>
         <span class="dot fas fa-circle"></span>
         <span class="dot far fa-circle"></span>
+        <span class="dot far fa-circle"></span>
+
     </div>
     <div class="swipe">
         <div class="swipe-wrap">
@@ -49,10 +92,12 @@
             <div class="page page-camera">
                 <div class="camera">
                     <video class="width-100 height-100vh" id="video">Video stream not available.</video>
-                    <button type="button" class="btn btn-success btn-xl take-picture"><i class="fa fa-camera"></i></button>
-                    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center" style="display: none;">
-                        <img src="images/icons/logo-outer.png" class="loading-outer"/>
-                        <img src="images/icons/logo-inner.png" class="loading-inner"/>
+                    <button type="button" class="btn btn-success btn-xl take-picture"><i
+                            class="fa fa-camera"></i></button>
+                    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center"
+                        style="display: none;">
+                        <img src="images/icons/logo-outer.png" class="loading-outer" />
+                        <img src="images/icons/logo-inner.png" class="loading-inner" />
                     </div>
 
                     <div class="result" style="display: none;">
@@ -76,6 +121,11 @@
                     </div>
                 </div>
             </div>
+            <div class="page page-map">
+
+                <div id="map"></div>
+
+            </div>
             <div class="page page-settings">
                 <p>Settings</p>
             </div>
@@ -90,18 +140,18 @@
     <script src="/scripts/luxon-1.11.4.js"></script>
     <script src="https://unpkg.com/@tensorflow/tfjs"></script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+
     <script src="/scripts/app.js"></script>
-    <!-- CODELAB: Add the install script here -->
     <script src="/scripts/install.js"></script>
     <script>
         // CODELAB: Register service worker.
         if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then((reg) => {
-                console.log('Service worker registered.', reg);
-                });
-        });
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                    });
+            });
         }
     </script>
     <script>
@@ -115,13 +165,14 @@
             continuous: false,
             disableScroll: true,
             stopPropagation: true,
-            callback: function(index, element) {
+            callback: function (index, element) {
                 $(".dot").removeClass("fas").addClass("far");
                 $(".dot").eq(index).addClass("fas");
             },
-            transitionEnd: function(index, element) {}
+            transitionEnd: function (index, element) {}
         });
     </script>
 
 </body>
+
 </html>
