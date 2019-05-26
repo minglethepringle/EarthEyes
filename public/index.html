@@ -52,30 +52,10 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRMZ-E56UBFsSCY3cBd4px1CP7VvBS-uE&callback=initMap">
     </script>
-    <script>
-        function initMap() {
-            // The location of Uluru
-            var uluru = {
-                lat: -25.344,
-                lng: 131.036
-            };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), {
-                    zoom: 4,
-                    center: uluru
-                });
-            // The marker, positioned at Uluru
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map
-            });
-        }
-    </script>
+
     <div class="nav-dots">
         <span class="dot far fa-circle"></span>
         <span class="dot fas fa-circle"></span>
-        <span class="dot far fa-circle"></span>
         <span class="dot far fa-circle"></span>
 
     </div>
@@ -104,13 +84,14 @@
                         <h4 class="text-center mb-3 mt-2">Or, manually search:</h4>
                         <form class="search-form" action="POST">
                             <div class="input-group">
-                                <input class="form-control border-right-0 border" type="search" placeholder="Search for items...">
+                                <input class="form-control border-right-0 border" type="search"
+                                    placeholder="Search for items...">
                                 <span class="input-group-append">
                                     <button class="btn btn-outline-secondary border-left-0 border" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
-                                </sp an>
-                            </div>                        
+                                    </sp an>
+                            </div>
                         </form>
                     </div>
                     <hr>
@@ -125,7 +106,8 @@
             <div class="page page-camera">
                 <div class="camera">
                     <video class="width-100 height-100vh" id="video">Video stream not available.</video>
-                    <button type="button" class="btn btn-success btn-xl take-picture"><i class="fa fa-camera"></i></button>
+                    <button type="button" class="btn btn-success btn-xl take-picture"><i
+                            class="fa fa-camera"></i></button>
 
                     <div class="result" style="display: none;">
                         <div class="result-object">
@@ -135,9 +117,17 @@
                         <hr>
                         <div class="result-location d-flex flex-column">
                             <p class="mb-1">NEAREST RECYCLING:</p>
-                            <div class="d-flex flex-row">
-                                <b class="result-location-name flex-grow-1"></b>
-                                <span class="fa fa-pin"></span>
+                            <div class="d-flex flex-row align-items-center">
+                                <b class="result-location-name flex-grow-1">Staples</b>
+                                <button id="woahwoahwoah" style="display:none" onclick="" type="button"
+                                    class="btn text-white"><svg class="svg-inline--fa fa-location-arrow fa-w-16"
+                                        aria-hidden="true" focusable="false" data-prefix="fa" data-icon="location-arrow"
+                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z">
+                                        </path>
+                                    </svg><!-- <i class="fa fa-location-arrow"></i> --></button>
                             </div>
                         </div>
                     </div>
@@ -148,11 +138,7 @@
                     </div>
                 </div>
             </div>
-            <div class="page page-map">
 
-                <div id="map"></div>
-
-            </div>
             <div class="page page-settings">
                 <p>Settings</p>
             </div>
@@ -164,9 +150,10 @@
         </ul>
     </div>
 
-    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center" style="display: none;">
-        <img src="images/icons/logo-outer.png" class="loading-outer"/>
-        <img src="images/icons/logo-inner.png" class="loading-inner"/>
+    <div class="loading-icon width-100 height-100vh d-flex justify-content-center align-items-center"
+        style="display: none;">
+        <img src="images/icons/logo-outer.png" class="loading-outer" />
+        <img src="images/icons/logo-inner.png" class="loading-inner" />
     </div>
 
 
@@ -202,7 +189,7 @@
             continuous: false,
             disableScroll: true,
             stopPropagation: false,
-            callback: function(index, element) {
+            callback: function (index, element) {
                 $(".dot").removeClass("fas").addClass("far");
                 $(".dot").eq(index).addClass("fas");
             },
