@@ -1,4 +1,7 @@
 # EarthEyes
+
+###### SECOND PLACE | ENVIRONMENTAL
+
 A Progressive Web App with computer vision and API access to recognize objects and tell you where they can be recycled (+ more!).
 
 ## How does it work?
@@ -23,9 +26,9 @@ YouTube Video: https://youtu.be/RS1ekTo6DqM
 - API requests result in 500. Solution: Switch to another hosting platform; GAE blocks some outgoing requests for god-knows-why.
 
 ## Stats:
-**Main Color**: #026928
+**Main color**: #026928
 
-**Development Time**: 17 hours
+**Development time**: 17 hours
 
 **Cups of coffee**: 5
 
@@ -33,5 +36,6 @@ YouTube Video: https://youtu.be/RS1ekTo6DqM
 
 **Presentation time given**: 3 min
 
-**Percent of points used**: 45%
+**Percent of points explained**: 45%
 
+**Amount of money on Starbucks Gift Card prize when it said $15-$500**: $15
