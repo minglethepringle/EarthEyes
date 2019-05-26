@@ -31,7 +31,7 @@ YouTube Video: https://youtu.be/RS1ekTo6DqM
 
 **Hours of sleep**: 3
 
-**Presentation time given: 3 min
+**Presentation time given**: 3 min
 
-**Percent of points used: 45%
+**Percent of points used**: 45%
 
