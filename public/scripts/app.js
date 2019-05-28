@@ -12,7 +12,7 @@ $("body").ready(function () {
     }
 
     async function guess() {
-
+        // alert("got guess!");
         var imgEl = document.getElementById('photo');
         var result = await net.classify(imgEl);
         if (result.length <= 0) {
@@ -27,8 +27,8 @@ $("body").ready(function () {
             stopLoading();
             return;
         }
-
         navigator.geolocation.getCurrentPosition(function (pos) {
+            // alert("got position");
             latitude = pos.coords.latitude;
             longitude = pos.coords.longitude;
             console.log(latitude);
@@ -37,6 +37,7 @@ $("body").ready(function () {
             query = encodeURIComponent(query);
             console.log(query);
             $.get("/endpoint/query/" + latitude + "/" + longitude + "/" + query, function (data) {
+                // alert("got query");
                 new_latitude = data["latitude"];
                 new_longitude = data["longitude"];
                 console.log(new_latitude);
@@ -180,7 +181,7 @@ $("body").ready(function () {
     /* ============================================ */
 
     /* Quick Recycle */
-    $(".quick-recycle button").click(function() {
+    $(".quick-recycle button").click(function () {
         getDetails($(this).data("id"));
     });
 
@@ -197,23 +198,23 @@ $("body").ready(function () {
             startLoading();
             $.get("/endpoint/getMaterials/" + searchInput, function (data) {
                 stopLoading();
-                if(data.length == 0) {
+                if (data.length == 0) {
                     alert("No results found!");
                     return;
                 }
                 $(".search-list").html("");
-                $.each(data, function(i, obj) {
+                $.each(data, function (i, obj) {
                     $(".search-list").append('<li data-id="' + obj.material_id + '">' + obj.description + '</li>');
                 });
                 $(".page-search-list").show();
-            }).fail(function() {
+            }).fail(function () {
                 alert("Could not search!");
                 stopLoading();
             });
         }
     });
 
-    $(".search-list").on("click", "li", function() {
+    $(".search-list").on("click", "li", function () {
         getDetails($(this).data("id"));
     });
 
@@ -256,7 +257,7 @@ $("body").ready(function () {
         });
     }
 
-    $("body").on("click", ".back-button", function() {
+    $("body").on("click", ".back-button", function () {
         $(this).parent().parent().fadeOut();
     });
 
